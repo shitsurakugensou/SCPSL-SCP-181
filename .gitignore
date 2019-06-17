@@ -1,1 +1,5 @@
-
+# ide
+.vs/
+obj/
+SCPSL-SCP-181.csproj
+SCPSL-SCP-181.sln
