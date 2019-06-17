@@ -57,12 +57,31 @@ namespace SCPSL_SCP_181{
              * 随机选一个D-Class
              */
 
+            // 如果 D-Class 人数=<0的话 替换D-Class人数为0 避免下面的报错
+            int classDNumber = classD.Count;
+
+            // 没有D-Class人员就结束程序
+            if(classDNumber <= 0){
+                return;
+            }
+
             // 随机数
             Random random = new Random();
-            GlobalVar.scp181 = classD[random.Next(0, classD.Count - 1)];
+
+   
+            GlobalVar.scp181 = classD[random.Next(0, classDNumber - 1)];
+
+            // 给个硬币 证明身份
+            GlobalVar.scp181.GiveItem(ItemType.COIN);
+
+            // 给个头衔
+            GlobalVar.scp181.SetRank("orange", "SCP-181", "SCP-D");
+
+            // 给SCP-181一个字幕提示
+            //GlobalVar.scp181.SendConsoleMessage("[SCP-181] 你是SCP-181", "green");
 
             // 提示信息
-            this.plugin.Info("[SCP-181][Info] 本局的SCP-181是: " + GlobalVar.scp181.Name.ToString() + " SteamID: " + GlobalVar.scp181.SteamId.ToString());
+            this.plugin.Info("[SCP-181][Info] 本局的SCP-181是: " + GlobalVar.scp181.Name.ToString() + "[" + GlobalVar.scp181.PlayerId.ToString() + "]");
 
             return;
         }
