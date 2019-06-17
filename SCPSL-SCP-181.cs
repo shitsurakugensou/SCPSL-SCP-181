@@ -26,12 +26,14 @@ namespace SCPSL_SCP_181 {
 
         public override void OnDisable(){
 
-            throw new NotImplementedException();
+            this.Info("[SCP-181][Info] SCP181 disable!");
+            //throw new NotImplementedException();
         }
 
         public override void OnEnable(){
 
-            throw new NotImplementedException();
+            this.Info("[SCP-181][Info] SCP181 loaded!");
+            //throw new NotImplementedException();
         }
 
         public override void Register(){
@@ -49,8 +51,12 @@ namespace SCPSL_SCP_181 {
             // 181躲避攻击几率
             this.AddConfig(new Smod2.Config.ConfigSetting("scp181_dodge_chance", 6, true, "How many percentage that SCP181 can dodge the attack"));
 
+            /*
+             * 注册事件
+             */
 
-            throw new NotImplementedException();
+            this.AddEventHandlers(new OnGameStart(this));
+
         }
 
     }
