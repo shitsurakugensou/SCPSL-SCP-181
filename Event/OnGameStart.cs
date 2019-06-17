@@ -78,7 +78,7 @@ namespace SCPSL_SCP_181{
             GlobalVar.scp181.SetRank("orange", "SCP-181", "SCP-D");
 
             // 给SCP-181一个字幕提示
-            //GlobalVar.scp181.SendConsoleMessage("[SCP-181] 你是SCP-181", "green");
+            GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> 你是SCP-181", false);
 
             // 提示信息
             this.plugin.Info("[SCP-181][Info] 本局的SCP-181是: " + GlobalVar.scp181.Name.ToString() + "[" + GlobalVar.scp181.PlayerId.ToString() + "]");
