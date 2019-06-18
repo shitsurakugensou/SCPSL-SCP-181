@@ -44,6 +44,7 @@ namespace SCPSL_SCP_181.Event{
 
             // 如果随机数<=设置的概率 就免伤害
             if (number <= luckyNumber) {
+                GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>SCP-181免除本次伤害~</color>", false);
                 ev.Damage = 0;
             }
             
