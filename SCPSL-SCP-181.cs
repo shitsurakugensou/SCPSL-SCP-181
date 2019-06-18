@@ -57,10 +57,10 @@ namespace SCPSL_SCP_181 {
              */
 
             // 开局选取181
-            this.AddEventHandlers(new OnGameStart(this));
+            this.AddEventHandlers(new OnGameStartEvent(this));
 
             // 玩家开门事件
-            this.AddEventHandlers(new OnDoorOpen(this));
+            this.AddEventHandlers(new OnDoorAccessEvent(this));
 
         }
 
