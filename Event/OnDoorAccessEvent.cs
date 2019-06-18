@@ -61,7 +61,10 @@ namespace SCPSL_SCP_181.Event {
 
             // 如果随机数<=设置的概率 就开门 | 判断门是否关闭
             if (number <= luckyNumber && ev.Door.Open == false){
+
+                GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
                 ev.Door.Open = true;
+
                 return;
             }
 
