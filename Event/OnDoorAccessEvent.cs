@@ -17,7 +17,7 @@ namespace SCPSL_SCP_181.Event {
         // 插件对象
         private Plugin plugin = null;
 
-        public OnDoorAccess(Plugin plugin) {
+        public OnDoorAccessEvent(Plugin plugin) {
             this.plugin = plugin;
         }
 
