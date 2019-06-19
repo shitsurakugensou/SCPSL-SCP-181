@@ -71,21 +71,7 @@ namespace SCPSL_SCP_181 {
             
             // SCP-181变成NTF后
             this.AddEventHandlers(new OnCheckEscapeEvent(this));
-            
-            
-            /**
-             * 调试信息
-             */
-            
-            if (this.GetConfigBool("scp181_debug") == true){
-                this.Info("======================SCP-181 Config [Debug]======================");
-                this.Info("Version: " + this.Details.version + " | Author: " + this.Details.author);
-                this.Info("SCP181-Enable: " + this.GetConfigBool("scp181_enable"));
-                this.Info("SCP181-Debug: " + this.GetConfigBool("scp181_debug"));
-                this.Info("SCP181-DoorOpenChance: " + this.GetConfigInt("scp181_door_open_chance"));
-                this.Info("SCP181-DodgeChance: " + this.GetConfigInt("scp181_dodge_chance"));
-            }
-            
+
             return;
         }
 
