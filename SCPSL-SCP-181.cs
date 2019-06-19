@@ -17,7 +17,7 @@ namespace SCPSL_SCP_181 {
         author = "SaigyoujiYuyuko",
         configPrefix = "scp181",
         name = "SCP-181",
-        description = "Randomly D-class personnel have randomly chance to open the authorizing door without keycards",
+        description = "Randomly D-class personnel have randomly chance to open the authorizing door without KeyCards",
         id = "org.shitsurakugensou.scp.scp-181",
         version = "1.0.0",
         SmodMajor = 3,
