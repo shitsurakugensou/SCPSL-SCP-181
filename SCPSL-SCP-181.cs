@@ -45,6 +45,9 @@ namespace SCPSL_SCP_181 {
 
             // 是否启用插件
             this.AddConfig(new ConfigSetting("scp181_enable", true, true, "enable/disable scp181"));
+            
+            // 调试模式
+            this.AddConfig(new ConfigSetting("scp181_debug", false, true, "enable/disable debug mode for scp181"));
 
             // 181开门几率
             this.AddConfig(new ConfigSetting("scp181_door_open_chance", 6, true, "How many percentage that SCP181 can open the door"));
