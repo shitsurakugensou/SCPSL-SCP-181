@@ -19,7 +19,7 @@ namespace SCPSL_SCP_181 {
         name = "SCP-181",
         description = "Randomly D-class personnel have randomly chance to open the authorizing door without KeyCards",
         id = "org.shitsurakugensou.scp.scp-181",
-        version = "1.0.0",
+        version = "1.0.1",
         SmodMajor = 3,
         SmodMinor = 1,
         SmodRevision = 20
