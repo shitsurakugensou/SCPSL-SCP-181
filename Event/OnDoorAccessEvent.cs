@@ -58,7 +58,6 @@ namespace SCPSL_SCP_181.Event {
                 return;
             }
 
-
             /*
              * 几率判断
              */
@@ -74,17 +73,12 @@ namespace SCPSL_SCP_181.Event {
             if (number <= luckyNumber && ev.Door.Open == false && ev.Door.Locked == false){
                 ev.Door.Open = true;
                 GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
-
-                return;
-            }
-
-            // 关门 - 100%成功
-            // 排除以下门: 检查点|办公区 等自动关门的门 | 锁住的门不能关
-            if (ev.Door.Open == true && ev.Door.Permission != "CHCKPOINT_ACC" && ev.Door.Locked == false){
-                
-                ev.Door.Open = false;
             }
             
+            // 排除以下门: 检查点|办公区 等自动关门的门 | 锁住的门不能关
+            if (number <= luckyNumber && ev.Door.Open == true && ev.Door.Locked == false){
+                ev.Door.Open = false;
+            }
             
             // 如果debug模式开启了
             if (plugin.GetConfigBool("scp181_debug") == true){
