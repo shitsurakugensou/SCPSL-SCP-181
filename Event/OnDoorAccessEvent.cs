@@ -23,6 +23,11 @@ namespace SCPSL_SCP_181.Event {
 
         public void OnDoorAccess(PlayerDoorAccessEvent ev){
             
+            // 判断有木有SCP-181
+            if (GlobalVar.scp181 == null) {
+                return;
+            }
+            
             // 判断玩家是不是SCP-181 不是则退出本次事件
             if (ev.Player.Name.Equals(GlobalVar.scp181.Name) == false){
                 return;
@@ -47,6 +52,12 @@ namespace SCPSL_SCP_181.Event {
 
                 return;
             }
+            
+            // 判断是否是权限门 不是就退出
+            if (ev.Door.Permission.Equals("") == true) {
+                return;
+            }
+
 
             /*
              * 几率判断
@@ -58,19 +69,29 @@ namespace SCPSL_SCP_181.Event {
 
             // 获取设置的概率
             int luckyNumber = this.plugin.GetConfigInt("scp181_door_open_chance");
-
-            // 如果随机数<=设置的概率 就开门 | 判断门是否关闭
-            if (number <= luckyNumber && ev.Door.Open == false){
-
-                GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
+            
+            // 如果随机数<=设置的概率 就开门 | 判断门是否关闭 | 锁住的门不能开
+            if (number <= luckyNumber && ev.Door.Open == false && ev.Door.Locked == false){
                 ev.Door.Open = true;
+                GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
 
                 return;
             }
 
             // 关门 - 100%成功
-            if (ev.Door.Open == true){
+            // 排除以下门: 检查点|办公区 等自动关门的门 | 锁住的门不能关
+            if (ev.Door.Open == true && ev.Door.Permission != "CHCKPOINT_ACC" && ev.Door.Locked == false){
+                
                 ev.Door.Open = false;
+            }
+            
+            
+            // 如果debug模式开启了
+            if (plugin.GetConfigBool("scp181_debug") == true){
+                plugin.Info("======================SCP-181 DoorAccess [Debug]======================");
+                plugin.Info("SCP-181: " + ev.Player.Name + "(" + ev.Player.PlayerId + ")");
+                plugin.Info("LuckyNumber: " + luckyNumber + " | RandomNumber: " + number);
+                plugin.Info("Door: " + ev.Door.Name + " | Permission: " + ev.Door.Permission + " | Opened: " + ev.Door.Open);
             }
 
             return;
