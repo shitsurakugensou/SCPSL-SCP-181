@@ -22,6 +22,12 @@ namespace SCPSL_SCP_181.Event{
         }
 
         void IEventHandlerRoundStart.OnRoundStart(RoundStartEvent ev){
+            
+            // 判断SCP-181是否开启 | 结束181选取=>后续监听器将不再触发
+            if (this.plugin.GetConfigBool("scp181_enable") == false) {
+                GlobalVar.scp181 = null;
+                return;
+            }
 
             // 玩家列表
             List<Player> playerList = this.plugin.Server.GetPlayers();
