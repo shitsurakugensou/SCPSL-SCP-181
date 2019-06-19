@@ -42,12 +42,21 @@ namespace SCPSL_SCP_181.Event{
             // 获取设置的概率
             int luckyNumber = this.plugin.GetConfigInt("scp181_dodge_chance");
 
-            // 如果随机数<=设置的概率 就免伤害
-            if (number <= luckyNumber) {
+            // 如果随机数<=设置的概率 就免伤害 | 只有SCP的攻击可以免伤
+            if (number <= luckyNumber && (Team)ev.Attacker.TeamRole.Team == Team.SCP) {
                 GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>SCP-181免除本次伤害~</color>", false);
                 ev.Damage = 0;
             }
             
+            
+            // 如果debug模式开启了
+            if (plugin.GetConfigBool("scp181_debug") == true){
+                plugin.Info("======================SCP-181 HurtEvent [Debug]======================");
+                plugin.Info("SCP-181: " + ev.Player.Name + "(" + ev.Player.PlayerId + ") | Hp: " + ev.Player.GetHealth());
+                plugin.Info("LuckyNumber: " + luckyNumber + " | RandomNumber: " + number);
+                plugin.Info("Damage: " + ev.Damage + " | Attacker: " + ev.Attacker.TeamRole.Name);
+            }
+
             return;
         }
 
