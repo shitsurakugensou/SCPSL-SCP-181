@@ -80,14 +80,31 @@ namespace SCPSL_SCP_181.Event{
             // 给个硬币 证明身份
             GlobalVar.scp181.GiveItem(ItemType.COIN);
 
-            // 给个头衔
-            GlobalVar.scp181.SetRank("orange", "SCP-181", "SCP-D");
+            // 给个头衔 | 判断是否开启头衔功能
+            if (this.plugin.GetConfigBool("scp181_prefix_display") == true) {
+                GlobalVar.scp181.SetRank("orange", "SCP-181", "SCP-D");
+            }
+            
 
             // 给SCP-181一个字幕提示
             GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> 你是SCP-181", false);
 
             // 提示信息
             this.plugin.Info("[SCP-181][Info] 本局的SCP-181是: " + GlobalVar.scp181.Name.ToString() + "[" + GlobalVar.scp181.PlayerId.ToString() + "]");
+            
+            
+            /*
+             * 调试信息 - 插件
+             */
+            
+            if (this.plugin.GetConfigBool("scp181_debug") == true){
+                this.plugin.Info("======================SCP-181 Config [Debug]======================");
+                this.plugin.Info("Version: " + this.plugin.Details.version + " | Author: " + this.plugin.Details.author);
+                this.plugin.Info("SCP181-Enable: " + this.plugin.GetConfigBool("scp181_enable"));
+                this.plugin.Info("SCP181-Debug: " + this.plugin.GetConfigBool("scp181_debug"));
+                this.plugin.Info("SCP181-DoorOpenChance: " + this.plugin.GetConfigInt("scp181_door_open_chance"));
+                this.plugin.Info("SCP181-DodgeChance: " + this.plugin.GetConfigInt("scp181_dodge_chance"));
+            }
 
             return;
         }
