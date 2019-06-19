@@ -77,17 +77,10 @@ namespace SCPSL_SCP_181.Event {
                 plugin.Info("Door: " + ev.Door.Name + " | Permission: " + ev.Door.Permission + " | Opened: " + ev.Door.Open);
             }
             
-            // 如果随机数<=设置的概率 就开门 | 判断门是否关闭 | 锁住的门不能开
-            if (number <= luckyNumber && ev.Door.Open == false && ev.Door.Locked == false){
+            // 如果随机数<=设置的概率 就开门/关门 | 锁住的门不能开
+            if (number <= luckyNumber && ev.Door.Locked == false){
                 ev.Allow = true;
                 GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
-                
-                return;
-            }
-            
-            // 排除以下门: 检查点|办公区 等自动关门的门 | 锁住的门不能关
-            if (number <= luckyNumber && ev.Door.Open == true && ev.Door.Locked == false && ev.Door.Permission != "CHCKPOINT_ACC"){
-                ev.Allow = true;
                 
                 return;
             }
