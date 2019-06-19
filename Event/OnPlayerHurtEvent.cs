@@ -29,7 +29,12 @@ namespace SCPSL_SCP_181.Event{
             if (ev.Player.PlayerId != GlobalVar.scp181.PlayerId){
                 return;
             }
-
+            
+            // 判断如果SCP-181在口袋空间的话退出保护 | Future: 跳过这个事件 交个口袋空间事件接管
+            if (ev.DamageType == DamageType.SCP_106) {
+                return;
+            }
+            
 
             /*
              * 几率判断
