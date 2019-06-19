@@ -15,12 +15,17 @@ namespace SCPSL_SCP_181.Event{
 
         private Plugin plugin = null;
 
-        OnPlayerHurtEvent(Plugin plugin){
+        public OnPlayerHurtEvent(Plugin plugin){
             this.plugin = plugin;
         }
 
         void IEventHandlerPlayerHurt.OnPlayerHurt(PlayerHurtEvent ev) {
-
+            
+            // 判断有木有SCP-181
+            if (GlobalVar.scp181 == null) {
+                return;
+            }
+            
             // 判断玩家是不是SCP-181 不是则退出本次事件
             if (ev.Player.Name.Equals(GlobalVar.scp181.Name) == false){
                 return;
