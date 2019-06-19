@@ -55,6 +55,7 @@ namespace SCPSL_SCP_181 {
             // 181躲避攻击几率
             this.AddConfig(new ConfigSetting("scp181_dodge_chance", 6, true, "How many percentage that SCP181 can dodge the attack"));
 
+            
             /*
              * 注册事件
              */
@@ -64,7 +65,28 @@ namespace SCPSL_SCP_181 {
 
             // 玩家开门事件
             this.AddEventHandlers(new OnDoorAccessEvent(this));
-
+            
+            // SCP-181 躲避攻击
+            this.AddEventHandlers(new OnPlayerHurtEvent(this));
+            
+            // SCP-181变成NTF后
+            this.AddEventHandlers(new OnCheckEscapeEvent(this));
+            
+            
+            /**
+             * 调试信息
+             */
+            
+            if (this.GetConfigBool("scp181_debug") == true){
+                this.Info("======================SCP-181 Config [Debug]======================");
+                this.Info("Version: " + this.Details.version + " | Author: " + this.Details.author);
+                this.Info("SCP181-Enable: " + this.GetConfigBool("scp181_enable"));
+                this.Info("SCP181-Debug: " + this.GetConfigBool("scp181_debug"));
+                this.Info("SCP181-DoorOpenChance: " + this.GetConfigInt("scp181_door_open_chance"));
+                this.Info("SCP181-DodgeChance: " + this.GetConfigInt("scp181_dodge_chance"));
+            }
+            
+            return;
         }
 
     }
