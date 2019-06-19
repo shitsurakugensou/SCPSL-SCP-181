@@ -31,6 +31,14 @@ namespace SCPSL_SCP_181.Event {
                 return;
             }
             
+            // 如果debug模式开启了
+            if (plugin.GetConfigBool("scp181_debug") == true){
+                plugin.Info("======================SCP-181 CheckEscape [Debug]======================");
+                plugin.Info("SCP-181: " + ev.Player.Name + "(" + ev.Player.PlayerId + ")");
+                plugin.Info("Team: " + ev.Player.TeamRole.Name);
+            }
+
+            
             // SCP-181 是否被NTF抓 | 否: 变成混沌 物品: 手雷 面板 E11 300发5.56子弹
             if (ev.Player.IsHandcuffed() == false) {
                 ev.Player.GiveItem(ItemType.FLASHBANG);
@@ -60,14 +68,6 @@ namespace SCPSL_SCP_181.Event {
             
             // SCP-181到此结束
             GlobalVar.scp181 = null;
-            
-            
-            // 如果debug模式开启了
-            if (plugin.GetConfigBool("scp181_debug") == true){
-                plugin.Info("======================SCP-181 CheckEscape [Debug]======================");
-                plugin.Info("SCP-181: " + ev.Player.Name + "(" + ev.Player.PlayerId + ")");
-                plugin.Info("Team: " + ev.Player.TeamRole.Name);
-            }
             
             return;
         }
