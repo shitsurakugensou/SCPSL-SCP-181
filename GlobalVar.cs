@@ -18,6 +18,9 @@ namespace SCPSL_SCP_181 {
 
         // scp-181 玩家对象
         public static Player scp181 = null;
+        
+        // scp-181 是否重生 | after player escape
+        public static bool scp181_escape = false;
 
     }
 
