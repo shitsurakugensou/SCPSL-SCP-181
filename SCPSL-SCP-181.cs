@@ -10,6 +10,7 @@ using Smod2.Attributes;
 using SCPSL_SCP_181;
 using SCPSL_SCP_181.Event;
 using Smod2.Config;
+using Smod2.Events;
 
 namespace SCPSL_SCP_181 {
 
@@ -19,7 +20,7 @@ namespace SCPSL_SCP_181 {
         name = "SCP-181",
         description = "Randomly D-class personnel have randomly chance to open the authorizing door without KeyCards",
         id = "org.shitsurakugensou.scp.scp-181",
-        version = "1.0.0",
+        version = "1.0.1",
         SmodMajor = 3,
         SmodMinor = 1,
         SmodRevision = 20
@@ -72,9 +73,15 @@ namespace SCPSL_SCP_181 {
             // SCP-181 躲避攻击
             this.AddEventHandlers(new OnPlayerHurtEvent(this));
             
-            // SCP-181变成NTF后
-            this.AddEventHandlers(new OnCheckEscapeEvent(this));
-
+            // SCP-181 出逃
+            this.AddEventHandlers(new OnCheckEscapeEvent(this), Priority.Highest);
+            
+            // SCP-181 死亡
+            this.AddEventHandlers(new OnPlayerDieEvent(this));
+            
+            // SCP-181 转换阵营
+            this.AddEventHandlers(new OnPlayerSpawnEvent(this), Priority.Highest);
+            
             return;
         }
 

@@ -69,23 +69,20 @@ namespace SCPSL_SCP_181.Event {
             // 获取设置的概率
             int luckyNumber = this.plugin.GetConfigInt("scp181_door_open_chance");
             
-            // 如果随机数<=设置的概率 就开门 | 判断门是否关闭 | 锁住的门不能开
-            if (number <= luckyNumber && ev.Door.Open == false && ev.Door.Locked == false){
-                ev.Door.Open = true;
-                GlobalVar.scp181.PersonalBroadcast(8, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
-            }
-            
-            // 排除以下门: 检查点|办公区 等自动关门的门 | 锁住的门不能关
-            if (number <= luckyNumber && ev.Door.Open == true && ev.Door.Locked == false){
-                ev.Door.Open = false;
-            }
-            
             // 如果debug模式开启了
             if (plugin.GetConfigBool("scp181_debug") == true){
                 plugin.Info("======================SCP-181 DoorAccess [Debug]======================");
                 plugin.Info("SCP-181: " + ev.Player.Name + "(" + ev.Player.PlayerId + ")");
                 plugin.Info("LuckyNumber: " + luckyNumber + " | RandomNumber: " + number);
                 plugin.Info("Door: " + ev.Door.Name + " | Permission: " + ev.Door.Permission + " | Opened: " + ev.Door.Open);
+            }
+            
+            // 如果随机数<=设置的概率 就开门/关门 | 锁住的门不能开
+            if (number <= luckyNumber && ev.Door.Locked == false){
+                ev.Allow = true;
+                GlobalVar.scp181.PersonalBroadcast(6, "<color=orange>[SCP-181]</color> <color=green>你太幸运了~ 使用了SCP-181的技能</color>", false);
+                
+                return;
             }
 
             return;
