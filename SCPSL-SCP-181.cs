@@ -73,9 +73,15 @@ namespace SCPSL_SCP_181 {
             // SCP-181 躲避攻击
             this.AddEventHandlers(new OnPlayerHurtEvent(this));
             
-            // SCP-181变成NTF后
+            // SCP-181 出逃
             this.AddEventHandlers(new OnCheckEscapeEvent(this), Priority.Highest);
-
+            
+            // SCP-181 死亡
+            this.AddEventHandlers(new OnPlayerDieEvent(this));
+            
+            // SCP-181 转换阵营
+            this.AddEventHandlers(new OnPlayerSpawnEvent(this));
+            
             return;
         }
 
