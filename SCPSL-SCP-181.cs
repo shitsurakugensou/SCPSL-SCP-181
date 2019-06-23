@@ -80,7 +80,7 @@ namespace SCPSL_SCP_181 {
             this.AddEventHandlers(new OnPlayerDieEvent(this));
             
             // SCP-181 转换阵营
-            this.AddEventHandlers(new OnPlayerSpawnEvent(this));
+            this.AddEventHandlers(new OnPlayerSpawnEvent(this), Priority.Highest);
             
             return;
         }
