@@ -10,6 +10,7 @@ using Smod2.Attributes;
 using SCPSL_SCP_181;
 using SCPSL_SCP_181.Event;
 using Smod2.Config;
+using Smod2.Events;
 
 namespace SCPSL_SCP_181 {
 
@@ -73,7 +74,7 @@ namespace SCPSL_SCP_181 {
             this.AddEventHandlers(new OnPlayerHurtEvent(this));
             
             // SCP-181变成NTF后
-            this.AddEventHandlers(new OnCheckEscapeEvent(this));
+            this.AddEventHandlers(new OnCheckEscapeEvent(this), Priority.Highest);
 
             return;
         }
